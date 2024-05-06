@@ -51,10 +51,9 @@ export default function App() {
 
 
     return (
-        <div className="bg-white">
-
+        <div>
             {!token ?
-                <a className="loginLink" href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>log in</a>
+                <a className="loginLink rounded-full py-3 text-center grid font-bold w-full mt-80" href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>LOG IN</a>
                 : <button onClick={logout}>Logout</button>}
 
             {token ?
