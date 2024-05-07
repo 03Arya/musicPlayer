@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import axios from "axios"
+import Featured from "./featured"
 
 
 export default function App() {
@@ -57,10 +58,7 @@ export default function App() {
                 : <button onClick={logout}>Logout</button>}
 
             {token ?
-                <form onSubmit={searchArtists}>
-                    <input type="text" onChange={e => setSearchKey(e.target.value)} />
-                    <button type={"submit"}>Search</button>
-                </form>
+                <Featured />
                 : null
             }
             {
@@ -73,5 +71,6 @@ export default function App() {
             }
 
         </div>
+
     );
 }
