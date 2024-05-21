@@ -1,8 +1,5 @@
 import Image from "next/image";
 import Login from "@/components/login";
-import "./globals.css"
-import "../styles/login.css"
-import "../styles/footer.css"
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 
