@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function Featured() {
+export default function NewReleases() {
     const [data, setData] = useState(null);
     const [albums, setAlbums] = useState([]);
 
@@ -20,20 +20,17 @@ export default function Featured() {
         }
         fetchData();
     }, []);
-
     return (
-        <>
-            <section className="grid grid-cols-1 gap-6 mx-auto">
-                {albums.map(album => (
-                    <div className="h-96 w-full" key={album.id}>
-                        <img className="h-96 absolute rounded-md mx-auto grid justify-center" src={album.images[0].url} alt={album.name} width="325px" />
-                        <div className="relative text-white">
-                            <p className="">{album.name}</p>
-                            <p>Soundtrack</p>
-                        </div>
+        <section className="grid grid-cols-1 gap-6 mx-auto">
+            {albums.map(album => (
+                <div className="h-96 w-full" key={album.id}>
+                    <img className="h-96 absolute rounded-md mx-auto grid justify-center" src={album.images[0].url} alt={album.name} width="325px" />
+                    <div className="relative text-white">
+                        <p className="">{album.name}</p>
+                        <p>Soundtrack</p>
                     </div>
-                ))}
-            </section>
-        </>
-    );
+                </div>
+            ))}
+        </section>
+    )
 }

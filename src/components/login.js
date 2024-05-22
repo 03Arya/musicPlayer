@@ -1,8 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import axios from "axios"
-import { useHistory } from 'react-router-dom';
 
 export default function Login() {
     const CLIENT_ID = "bcb27557f96842b4914445c663b4cb7f"
@@ -13,8 +11,6 @@ export default function Login() {
     const [token, setToken] = useState("")
     const [artists, setArtists] = useState([])
 
-    const history = useHistory();
-
     useEffect(() => {
         const hash = window.location.hash
         let token = window.localStorage.getItem("token")
@@ -23,7 +19,7 @@ export default function Login() {
             token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1];
             window.location.hash = ""
             window.localStorage.setItem("token", token)
-            history.push('/featured');
+            window.location.href = '/featured'; // Redirect using window.location.href
         }
         setToken(token)
 
@@ -32,7 +28,7 @@ export default function Login() {
     const logout = () => {
         setToken("")
         window.localStorage.removeItem("token")
-        history.push('/');
+        window.location.href = '/'; // Redirect using window.location.href
     }
 
     return (
