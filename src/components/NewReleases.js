@@ -15,11 +15,13 @@ export default function NewReleases() {
             const data = await response.json();
             setData(data);
             console.log(data)
-            setAlbums(data.albums.items);
-
+            if (data.albums) {
+                setAlbums(data.albums.items);
+            }
         }
         fetchData();
     }, []);
+
     return (
         <section className="grid grid-cols-1 gap-8 mx-auto max-w-xs">
             {albums.map(album => (
