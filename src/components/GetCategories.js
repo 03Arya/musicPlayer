@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { EllipsisHorizontal } from "react-ionicons";
+import Link from "next/link";
 
 export default function GetCategories() {
     const [categories, setCategories] = useState([]);
@@ -45,8 +46,8 @@ export default function GetCategories() {
                         <p className="max-w-80 mx-auto bg-pink-600 rounded-md text-white py-6 pl-6 grid grid-cols-2 grid-rows-1" onClick={() => fetchPlaylists(category.id)}>{category.name}<EllipsisHorizontal color="white" className="mx-auto pl-10" /></p>
                         <div className="px-6 gap-2 grid">
                             {selectedCategory === category.id && playlists.map(playlist => (
-                                <div>
-                                    <p key={playlist.id}>{playlist.name}</p>
+                                <div key={playlist.id}>
+                                    <Link href={`/playlists/${playlist.id}`}>{playlist.name}</Link>
                                 </div>
                             ))}
                         </div>
