@@ -6,3 +6,9 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+.Gradient {
+  background: linear-gradient(to left, #EE0979, #FF6A00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}

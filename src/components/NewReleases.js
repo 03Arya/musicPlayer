@@ -21,11 +21,11 @@ export default function NewReleases() {
         fetchData();
     }, []);
     return (
-        <section className="grid grid-cols-1 gap-6 mx-auto">
+        <section className="grid grid-cols-1 gap-8 mx-auto max-w-xs">
             {albums.map(album => (
-                <div className="h-96 w-full" key={album.id}>
-                    <img className="h-96 absolute rounded-md mx-auto grid justify-center" src={album.images[0].url} alt={album.name} width="325px" />
-                    <div className="relative text-white">
+                <div className="h-96 w-full shadow-xl shadow-slate-500/50" key={album.id}>
+                    <img className="h-96 absolute rounded-md mx-auto grid justify-center left-0 right-0" src={album.images[0].url} alt={album.name} width="325px" />
+                    <div className="relative text-xl font-bold pt-64 pl-6 Gradient">
                         <p className="">{album.name}</p>
                         <p>Soundtrack</p>
                     </div>
