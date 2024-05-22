@@ -16,7 +16,7 @@ export default function Header() {
     }
 
     // Extract the page name from the URL
-    const pageName = router.pathname.split("/").pop();
+    const pageName = router.pathname.split("/")[1];
 
     return (
         <header className="py-4 mx-auto">

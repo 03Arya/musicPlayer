@@ -1,3 +1,5 @@
+import Footer from '@/components/footer';
+import Header from '@/components/header';
 import { useRouter } from 'next/router'
 import { useEffect, useState } from "react";
 
@@ -33,11 +35,11 @@ export default function Playlist() {
                 });
                 const data = await response.json();
                 setPlaylist(data);
-            
+
                 let tracksData = [];
                 let nextTracksUrl = data.tracks.href;
                 let retryAfter = 1;
-            
+
                 while (nextTracksUrl) {
                     try {
                         const tracksResponse = await fetch(nextTracksUrl, {
@@ -45,14 +47,14 @@ export default function Playlist() {
                                 'Authorization': 'Bearer ' + token
                             }
                         });
-            
+
                         if (tracksResponse.status === 429) {
                             // Too Many Requests - retry after waiting for the time specified in the Retry-After header
                             retryAfter = parseInt(tracksResponse.headers.get('Retry-After'));
                             await new Promise(resolve => setTimeout(resolve, retryAfter * 1000));
                             continue;
                         }
-            
+
                         const pageData = await tracksResponse.json();
                         tracksData = [...tracksData, ...pageData.items];
                         nextTracksUrl = pageData.next;
@@ -61,7 +63,7 @@ export default function Playlist() {
                         break;
                     }
                 }
-            
+
                 setTracks(tracksData);
             }
             fetchData();
@@ -73,20 +75,27 @@ export default function Playlist() {
     }
 
     return (
-        <div>
-            <h1>{playlist.name}</h1>
-            <ul>
-                {tracks.map((trackItem, index) => (
-                    <li key={index}>
-                        {trackItem.track.name} by {trackItem.track.artists.map(artist => artist.name).join(', ')}
-                        {isPremium ? (
-                            <iframe src={`https://open.spotify.com/embed/track/${trackItem.track.id}`} width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                        ) : (
-                            <audio controls src={trackItem.track.preview_url}>Your browser does not support the audio element.</audio>
-                        )}
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <>
+                <main className="mx-auto max-w-lg">
+
+            <Header />
+            <div>
+                <h1>{playlist.name}</h1>
+                <ul>
+                    {tracks.map((trackItem, index) => (
+                        <li key={index}>
+                            {trackItem.track.name} by {trackItem.track.artists.map(artist => artist.name).join(', ')}
+                            {isPremium ? (
+                                <iframe src={`https://open.spotify.com/embed/track/${trackItem.track.id}`} width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                            ) : (
+                                <audio controls src={trackItem.track.preview_url}>Your browser does not support the audio element.</audio>
+                            )}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <Footer />
+        </main>
+        </>
     );
 }
