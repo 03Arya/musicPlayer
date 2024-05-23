@@ -5,7 +5,6 @@ import Header from "@/components/header";
 export default function Featured() {
 
     return (
-
         <main className="mx-auto max-w-lg">
             <Header />
             <div className="max-w-80 mx-auto py-4">
