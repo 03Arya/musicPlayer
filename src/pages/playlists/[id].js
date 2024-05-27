@@ -3,6 +3,7 @@ import Footer from '@/components/footer';
 import Header from '@/components/header';
 import { useRouter } from 'next/router';
 import useSpotify from '@/hooks/useSpotify';
+import Link from 'next/link';
 
 export default function Playlist() {
     const router = useRouter();
@@ -22,7 +23,14 @@ export default function Playlist() {
                     <ul>
                         {tracks.map((trackItem, index) => (
                             <li key={index}>
-                                {trackItem.track.name} by {trackItem.track.artists.map(artist => artist.name).join(', ')}
+                                <p>{trackItem.track.name}</p> by {trackItem.track.artists.map((artist, index, array) => (
+                                    <span key={index}>
+                                        <Link href={`/artists/${artist.id}`}>
+                                            <p>{artist.name}</p>
+                                        </Link>
+                                        {index < array.length - 1 && ', '}
+                                    </span>
+                                ))}
                                 {isPremium ? (
                                     <iframe src={`https://open.spotify.com/embed/track/${trackItem.track.id}`} width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                 ) : (
