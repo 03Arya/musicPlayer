@@ -7,8 +7,11 @@ import { MicOutline } from 'react-ionicons'
 import { ContrastOutline } from 'react-ionicons'
 import { SettingsOutline } from 'react-ionicons'
 import { RadioOutline } from 'react-ionicons'
+import useDarkMode from '@/hooks/useDarkMode'
 
 export default function Footer() {
+    const [theme, toggleTheme] = useDarkMode();
+
     return (
         <footer className="grid grid-cols-5 mx-auto fixed bottom-0 bg-white w-screen max-w-lg py-4">
             <a className='mx-auto' href="">
@@ -20,9 +23,10 @@ export default function Footer() {
             <Link className='mx-auto' href="/featured">
                 <RadioOutline className="mx-auto" />
             </Link>
-            <a className='mx-auto' href="">
+
+            <button onClick={toggleTheme} className='mx-auto' href="">
                 <ContrastOutline className="mx-auto" />
-            </a>
+            </button>
             <Link className='mx-auto' href="/categories">
                 <SettingsOutline className="mx-auto" />
             </Link>
