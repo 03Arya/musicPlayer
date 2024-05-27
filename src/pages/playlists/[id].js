@@ -18,23 +18,25 @@ export default function Playlist() {
         <>
             <main className="mx-auto max-w-lg">
                 <Header />
-                <div>
-                    <h1>{playlist.name}</h1>
-                    <ul>
+                <div className=''>
+                    <img className='mx-auto' src={playlist.images[0].url} alt={playlist.name} width="200px" height="200px" />
+                    <h1 className='text-center font-bold text-xl max-w-64 py-4 mx-auto'>{playlist.name}</h1>
+                    <ul className='mx-auto grid max-w-96 gap-8'>
                         {tracks.map((trackItem, index) => (
-                            <li key={index}>
-                                <p>{trackItem.track.name}</p> by {trackItem.track.artists.map((artist, index, array) => (
-                                    <span key={index}>
-                                        <Link href={`/artists/${artist.id}`}>
-                                            <p>{artist.name}</p>
-                                        </Link>
-                                        {index < array.length - 1 && ', '}
-                                    </span>
-                                ))}
+                            <li className='grid' key={index}>
+                                <div className='grid'>
+                                    <p className='mx-auto'>{trackItem.track.name}</p>{trackItem.track.artists.map((artist, index, array) => (
+                                        <span key={index}>
+                                            <Link href={`/artists/${artist.id}`}>
+                                                <p>{artist.name}</p>
+                                            </Link>
+                                        </span>
+                                    ))}
+                                </div>
                                 {isPremium ? (
                                     <iframe src={`https://open.spotify.com/embed/track/${trackItem.track.id}`} width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                 ) : (
-                                    <audio controls src={trackItem.track.preview_url}>Your browser does not support the audio element.</audio>
+                                    <audio className='h-10' controls src={trackItem.track.preview_url}>Your browser does not support the audio element.</audio>
                                 )}
                             </li>
                         ))}
