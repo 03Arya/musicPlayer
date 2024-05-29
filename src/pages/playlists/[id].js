@@ -19,10 +19,10 @@ export default function Playlist() {
             <main className="dark:bg-black transition duration-500 mx-auto max-w-lg">
                 <Header />
                 <div className=''>
-                    <h1 className='font-bold text-3xl max-w-96 mx-auto py-4'>Playlists</h1>
+                    <h1 className='font-bold text-3xl max-w-80 mx-auto py-4'>Playlists</h1>
                     <img className='mx-auto pt-5' src={playlist.images[0].url} alt={playlist.name} width="200px" height="200px" />
                     <h2 className='text-center font-bold text-xl max-w-64 py-4 mx-auto'>{playlist.name}</h2>
-                    <ul className='mx-auto grid max-w-96 gap-8 pt-5'>
+                    <ul className='mx-auto grid max-w-80 gap-8 pt-5'>
                         {tracks.map((trackItem, index) => (
                             <li className='grid' key={index}>
                                 <div className='grid'>
@@ -37,7 +37,7 @@ export default function Playlist() {
                                 {isPremium ? (
                                     <iframe src={`https://open.spotify.com/embed/track/${trackItem.track.id}`} height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                                 ) : (
-                                    <audio className='h-10' controls src={trackItem.track.preview_url}>Your browser does not support the audio element.</audio>
+                                    <audio className='h-10 mx-auto' controls src={trackItem.track.preview_url}>Your browser does not support the audio element.</audio>
                                 )}
                             </li>
                         ))}
