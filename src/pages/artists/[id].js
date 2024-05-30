@@ -35,7 +35,7 @@ export default function Artist({ id }) {
             const tracksResponses = await Promise.all(tracksPromises);
             const tracks = tracksResponses.map(response => response.data.items).flat();
             setTopTracks(tracks);
-            console.log(tracks);
+            console.log(tracks);  
         };
         fetchArtistAlbums();
     }, [id]);

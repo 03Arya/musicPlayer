@@ -14,9 +14,9 @@ export default function Footer() {
 
     return (
         <footer className="dark:bg-purple grid grid-cols-5 mx-auto fixed bottom-0 bg-white w-screen max-w-lg py-4">
-            <a className='mx-auto pt-2' href="">
+            <Link className='mx-auto pt-2' href="/albums">
                 <PulseOutline className="mx-auto" />
-            </a>
+            </Link>
             <a className='mx-auto pt-2' href="">
                 <MicOutline className="mx-auto" />
             </a>

@@ -25,6 +25,11 @@ export default function Playlist() {
                     <ul className='mx-auto grid max-w-80 gap-8 pt-5'>
                         {tracks.map((trackItem, index) => (
                             <li className='grid' key={index}>
+                                {isPremium ? (
+                                    <iframe src={`https://open.spotify.com/embed/track/${trackItem.track.id}`} height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                ) : (
+                                    <audio className='h-10 mx-auto' controls src={trackItem.track.preview_url}>Your browser does not support the audio element.</audio>
+                                )}
                                 <div className='grid'>
                                     <p className='mx-auto'>{trackItem.track.name}</p>{trackItem.track.artists.map((artist, index, array) => (
                                         <span key={index}>
@@ -34,11 +39,6 @@ export default function Playlist() {
                                         </span>
                                     ))}
                                 </div>
-                                {isPremium ? (
-                                    <iframe src={`https://open.spotify.com/embed/track/${trackItem.track.id}`} height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                                ) : (
-                                    <audio className='h-10 mx-auto' controls src={trackItem.track.preview_url}>Your browser does not support the audio element.</audio>
-                                )}
                             </li>
                         ))}
                     </ul>
