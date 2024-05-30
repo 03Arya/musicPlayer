@@ -25,15 +25,18 @@ export default function Albums() {
 
 
     return (
-        <main>
+        <main className="dark:bg-purple transition duration-500 mx-auto max-w-lg">
             <Header />
             <div>
-            {albums.map(album => (
-                <div className="" key={album.id}>
-                    <img className="rounded-md mx-auto grid justify-center left-0 right-0" src={album.images[0].url} alt={album.name} width="130px" height="130px" loading="lazy" />
-                    
+                <div className="max-w-80 mx-auto py-4">
+                    <h1 className="max-w-xs mx-auto font-bold text-3xl Gradient">All Albums</h1>
                 </div>
-            ))}
+                {albums.map(album => (
+                    <div className="" key={album.id}>
+                        <img className="rounded-md mx-auto grid justify-center left-0 right-0" src={album.images[0].url} alt={album.name} width="130px" height="130px" loading="lazy" />
+
+                    </div>
+                ))}
             </div>
             <Footer />
         </main>

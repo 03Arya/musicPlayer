@@ -63,7 +63,7 @@ export default function Artist({ id }) {
 
     return (
         <>
-            <main className='mx-auto max-w-lg'>
+            <main className='dark:bg-purple transition duration-500 mx-auto max-w-lg'>
                 <Header />
                 <div className=''>
                     <div className='absolute z-10'>
