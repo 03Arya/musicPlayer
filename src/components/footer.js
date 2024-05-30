@@ -13,7 +13,7 @@ export default function Footer() {
     const [theme, toggleTheme] = useDarkMode();
 
     return (
-        <footer className="grid grid-cols-5 mx-auto fixed bottom-0 bg-white w-screen max-w-lg py-4">
+        <footer className="dark:bg-purple grid grid-cols-5 mx-auto fixed bottom-0 bg-white w-screen max-w-lg py-4">
             <a className='mx-auto pt-2' href="">
                 <PulseOutline className="mx-auto" />
             </a>

@@ -16,7 +16,7 @@ export default function Playlist() {
 
     return (
         <>
-            <main className="dark:bg-black transition duration-500 mx-auto max-w-lg">
+            <main className="dark:bg-purple transition duration-500 mx-auto max-w-lg">
                 <Header />
                 <div className=''>
                     <h1 className='font-bold text-3xl max-w-80 mx-auto py-4'>Playlists</h1>
@@ -43,7 +43,6 @@ export default function Playlist() {
                         ))}
                     </ul>
                     <a className="listenAllButton text-pink-700 rounded-full py-3 text-center grid font-bold w-full my-20 max-w-80 mx-auto">LISTEN ALL</a>
-
                 </div>
                 <Footer />
             </main>
