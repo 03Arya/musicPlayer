@@ -4,6 +4,8 @@ import Header from '@/components/header';
 import { useRouter } from 'next/router';
 import useSpotify from '@/hooks/useSpotify';
 import Link from 'next/link';
+import { PlayOutline } from 'react-ionicons';
+
 
 export default function Playlist() {
     const router = useRouter();
@@ -23,24 +25,28 @@ export default function Playlist() {
                     <img className='mx-auto pt-5' src={playlist.images[0].url} alt={playlist.name} width="200px" height="200px" />
                     <h2 className='text-center font-bold text-xl max-w-64 py-4 mx-auto'>{playlist.name}</h2>
                     <ul className='mx-auto grid max-w-80 gap-8 pt-5'>
-                        {tracks.map((trackItem, index) => (
-                            <li className='grid' key={index}>
-                                {isPremium ? (
-                                    <iframe src={`https://open.spotify.com/embed/track/${trackItem.track.id}`} height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                                ) : (
-                                    <audio className='h-10 mx-auto' controls src={trackItem.track.preview_url}>Your browser does not support the audio element.</audio>
-                                )}
-                                <div className='grid'>
-                                    <p className='mx-auto'>{trackItem.track.name}</p>{trackItem.track.artists.map((artist, index, array) => (
-                                        <span key={index}>
-                                            <Link href={`/artists/${artist.id}`}>
-                                                <p>{artist.name}</p>
-                                            </Link>
-                                        </span>
-                                    ))}
-                                </div>
-                            </li>
-                        ))}
+                        {tracks.map((trackItem, index) => {
+                            const minutes = Math.floor(trackItem.track.duration_ms / 60000);
+                            const seconds = ((trackItem.track.duration_ms % 60000) / 1000).toFixed(0);
+                            return (
+                                <li className='grid' key={index}>
+                                    <div className='flex gap-3 w-64'>
+                                        <div className='bg-gradient-to-r from-pink-600 to-orange-600 rounded-full w-10 h-10 my-auto'>
+                                            <PlayOutline color="white" className='relative left-2.5 top-2' />
+                                        </div>
+                                        <div className='grid'>
+                                            <p className='text-sm font-bold w-44'>{trackItem.track.name}</p>
+                                            <span>
+                                                <Link href={`/artists/${trackItem.track.artists[0].id}`}>
+                                                    <p className='text-xs'>{trackItem.track.artists[0].name}</p>
+                                                </Link>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <p className='col-start-3 justify-end grid'>{minutes} : {seconds < 10 ? '0' : ''}{seconds}</p>
+                                </li>
+                            )
+                        })}
                     </ul>
                     <a className="listenAllButton text-pink-700 rounded-full py-3 text-center grid font-bold w-full my-20 max-w-80 mx-auto">LISTEN ALL</a>
                 </div>

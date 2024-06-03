@@ -10,9 +10,6 @@ export default function Artist({ id }) {
     const [topTracks, setTopTracks] = useState([]);
     const [albums, setAlbums] = useState([]);
 
-
-
-
     useEffect(() => {
         const fetchArtistAlbums = async () => {
             const token = localStorage.getItem('token');
@@ -41,8 +38,6 @@ export default function Artist({ id }) {
         };
         fetchArtistAlbums();
     }, [id]);
-
-
 
     useEffect(() => {
         const fetchArtist = async () => {
@@ -82,14 +77,14 @@ export default function Artist({ id }) {
                                 <div className='grid grid-cols-3'>
                                     <div className='col-span-2 flex gap-3 w-72'>
                                         <div className='bg-gradient-to-r from-pink-600 to-orange-600 rounded-full w-10 h-10 my-auto'>
-                                            <PlayOutline className='relative left-2.5 top-2' />
+                                            <PlayOutline color="white" className='relative left-2.5 top-2' />
                                         </div>
                                         <div className='col-start-2'>
                                             <p className='text-sm font-bold w-44'>{trackItem.name}</p>
                                             <p className='text-xs'>{artist.name}</p>
                                         </div>
                                     </div>
-                                    <p className='col-start-3 justify-end grid'>{minutes}:{seconds < 10 ? '0' : ''}{seconds}</p>
+                                    <p className='col-start-3 justify-end grid'>{minutes} : {seconds < 10 ? '0' : ''}{seconds}</p>
                                 </div>
                             </li>
                         )
