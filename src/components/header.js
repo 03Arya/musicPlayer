@@ -5,6 +5,7 @@ import { SearchOutline } from "react-ionicons"
 import { useState } from "react"
 import { useRouter } from 'next/router'
 
+
 export default function Header() {
     const router = useRouter();
     const [token, setToken] = useState("")
@@ -24,7 +25,7 @@ export default function Header() {
                 <button onClick={logout} href="/">
                     <ChevronBackOutline className="" />
                 </button>
-                <p className="text-center uppercase">{pageName}</p>
+                <p className="dark:text-white transition duration-500 text-center uppercase">{pageName}</p>
                 <SearchOutline className="justify-end grid" />
             </nav>
         </header>

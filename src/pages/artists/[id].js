@@ -68,7 +68,8 @@ export default function Artist({ id }) {
                     </div>
                     <img className='relative' src={artist.images[0]?.url} alt={artist.name} />
                 </div>
-                <ul className='mx-auto grid max-w-80 gap-8 pt-5'>
+                <p className='dark:text-white transition duration-500 mx-5 pt-5 font-bold'>All Songs</p>
+                <ul className='grid mx-5 gap-8 pt-5'>
                     {topTracks.map((trackItem, index) => {
                         const minutes = Math.floor(trackItem.duration_ms / 60000);
                         const seconds = ((trackItem.duration_ms % 60000) / 1000).toFixed(0);
@@ -80,11 +81,11 @@ export default function Artist({ id }) {
                                             <PlayOutline color="white" className='relative left-2.5 top-2' />
                                         </div>
                                         <div className='col-start-2'>
-                                            <p className='text-sm font-bold w-44'>{trackItem.name}</p>
-                                            <p className='text-xs'>{artist.name}</p>
+                                            <p className='dark:text-white transition duration-500 text-sm font-bold w-44'>{trackItem.name}</p>
+                                            <p className='text-xs text-gray-500'>{artist.name}</p>
                                         </div>
                                     </div>
-                                    <p className='col-start-3 justify-end grid'>{minutes} : {seconds < 10 ? '0' : ''}{seconds}</p>
+                                    <p className='col-start-3 justify-end grid text-gray-500'>{minutes} : {seconds < 10 ? '0' : ''}{seconds}</p>
                                 </div>
                             </li>
                         )
