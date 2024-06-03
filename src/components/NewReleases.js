@@ -26,9 +26,9 @@ export default function NewReleases() {
             {albums.map(album => (
                 <div className="h-96 w-full shadow-xl shadow-slate-500/50" key={album.id}>
                     <img className="h-96 absolute rounded-md mx-auto grid justify-center left-0 right-0" src={album.images[0].url} alt={album.name} width="325px" loading="lazy" />
-                    <div className="relative text-xl font-bold pt-72 pl-6 Gradient">
-                        <p className="">{album.name}</p>
-                        <p>Soundtrack</p>
+                    <div className="relative pt-72 pl-6 ">
+                        <p className="text-white text-xl font-bold">{album.name}</p>
+                        <p className="text-gray-300 ">Soundtrack</p>
                     </div>
                 </div>
             ))}
