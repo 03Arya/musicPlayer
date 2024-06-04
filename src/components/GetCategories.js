@@ -48,7 +48,7 @@ export default function GetCategories() {
                         <div className="px-6 gap-2 grid">
                             {selectedCategory === category.id && playlists.map(playlist => (
                                 <div className="grid grid-cols-2 my-2" key={playlist.id}>
-                                    <Link className="w-64 text-sm" href={`/playlists/${playlist.id}`}>{playlist.name}</Link>
+                                    <Link className="dark:text-white transition duration-500 w-60 text-sm" href={`/playlists/${playlist.id}`}>{playlist.name}</Link>
                                     <ChevronForwardOutline className="justify-end grid" />
                                 </div>
                             ))}
