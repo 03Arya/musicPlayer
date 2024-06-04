@@ -3,7 +3,6 @@ import Footer from "@/components/footer";
 import Header from "@/components/header";
 
 export default function Featured() {
-
     return (
         <main className="dark:bg-purple transition duration-500 mx-auto max-w-lg">
             <Header />

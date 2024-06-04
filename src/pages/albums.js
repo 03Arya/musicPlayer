@@ -35,7 +35,7 @@ export default function Albums() {
             </div>
             <section>
                 <div className="max-w-lg mx-5 grid grid-cols-2 py-6">
-                    <p className="font-bold">Featured Albums</p>
+                    <p className="dark:text-white transition duration-500 font-bold">Featured Albums</p>
                     <Link href="" className="text-end text-pink-600">View All</Link>
                 </div>
                 <div className="flex gap-4 flex-row overflow-x-auto no-scrollbar mx-5 pb-6">
@@ -47,26 +47,28 @@ export default function Albums() {
                     ))}
                 </div>
             </section>
+
             <section>
                 <div className="max-w-lg mx-5 grid grid-cols-2 py-6">
-                    <p className="font-bold">Best Sellers</p>
+                    <p className="dark:text-white transition duration-500 font-bold">Best Sellers</p>
                     <Link href="" className="text-end text-pink-600">View All</Link>
                 </div>
                 <div className="flex gap-4 flex-col overflow-x-auto no-scrollbar mx-5 pb-6">
                     {albums.map(album => (
                         <div className="grid grid-cols-3" key={album.id}>
-                            <img className="rounded-md w-20 h-20 max-w-40 grid justify-start" src={album.images[0].url} alt={album.name} loading="lazy" />
-                            <div className="w-40">
-                                <p className="font-bold text-sm">{album.artists[0].name}</p>
-                                <p className="text-xs pt-4">{album.name}</p>
+                            <div className="flex gap-3 col-span-2">
+                                <img className="rounded-md w-20 h-20 max-w-40 grid justify-start" src={album.images[0].url} alt={album.name} loading="lazy" />
+                                <div className="w-40">
+                                    <p className="dark:text-white transition duration-500 font-bold text-sm">{album.artists[0].name}</p>
+                                    <p className="dark:text-white transition duration-500 text-xs pt-4">{album.name}</p>
+                                </div>
                             </div>
-                            <p className="text-end text-xs">{album.total_tracks} Songs</p>
+                            <p className="text-end text-xs text-gray-500 col-start-3">{album.total_tracks} Songs</p>
                         </div>
                     ))}
                 </div>
             </section>
             <Footer />
         </main>
-
     )
 }

@@ -6,7 +6,6 @@ import useSpotify from '@/hooks/useSpotify';
 import Link from 'next/link';
 import { PlayOutline } from 'react-ionicons';
 
-
 export default function Playlist() {
     const router = useRouter();
     const { id } = router.query;

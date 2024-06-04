@@ -66,7 +66,7 @@ export default function Artist({ id }) {
                     <div className='absolute z-10'>
                         <h1 className='text-white font-bold text-3xl pl-5 pt-10'>{artist.name}</h1>
                     </div>
-                    <img className='relative' src={artist.images[0]?.url} alt={artist.name} />
+                    <img className='relative mx-auto' src={artist.images[0]?.url} alt={artist.name} />
                 </div>
                 <p className='dark:text-white transition duration-500 mx-5 pt-5 font-bold'>All Songs</p>
                 <ul className='grid mx-5 gap-8 pt-5'>
