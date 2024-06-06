@@ -28,7 +28,7 @@ export default function Albums() {
 
 
     return (
-        <main className="dark:bg-purple transition duration-500 mx-auto max-w-lg h-screen">
+        <main className="dark:bg-purple transition duration-500 mx-auto max-w-lg">
             <Header />
             <div className="max-w-lg mx-5 py-4">
                 <h1 className="max-w-xs mx-auto font-bold text-3xl Gradient">All Albums</h1>
