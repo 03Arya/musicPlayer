@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import Header from '@/components/header';
 
@@ -14,6 +14,21 @@ export default function SongPlayer() {
     const { id } = router.query;
 
     const [song, setSong] = useState(null);
+    const [album, setAlbum] = useState(null);
+    const [trackIndex, setTrackIndex] = useState(null);
+    const [progress, setProgress] = useState(0); // Progress of the song
+
+    const audioRef = useRef(); // Reference to the audio element
+
+    const playSong = () => {
+        const audio = audioRef.current;
+
+        if (audio.paused) {
+            audio.play();
+        } else {
+            audio.pause();
+        }
+    };
 
     useEffect(() => {
         if (id) { // Only run if id is defined
@@ -26,11 +41,78 @@ export default function SongPlayer() {
                 });
 
                 setSong(response.data);
+
+                // Fetch the album
+                const albumResponse = await axios.get(`https://api.spotify.com/v1/albums/${response.data.album.id}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                setAlbum(albumResponse.data);
+
+                // Find the index of the current track in the album
+                const trackIndex = albumResponse.data.tracks.items.findIndex(track => track.id === id);
+                setTrackIndex(trackIndex);
             };
-            console.log(song)
+
             fetchSong();
         }
     }, [id]);
+
+    useEffect(() => {
+        if (song) {
+            playSong();
+        }
+    }, [song]);
+
+    useEffect(() => {
+        const audio = audioRef.current;
+
+        if (audio) { // Only run if audio is defined
+            // Update progress every time the currentTime updates
+            const updateProgress = () => {
+                setProgress((audio.currentTime / audio.duration) * 100);
+            };
+
+            audio.addEventListener('timeupdate', updateProgress);
+
+            return () => {
+                // Clean up event listener
+                audio.removeEventListener('timeupdate', updateProgress);
+            };
+        }
+    }, []);
+
+    const skipForward = () => {
+        const audio = audioRef.current;
+        audio.currentTime += 10; // Skip forward 10 seconds
+    };
+
+    const skipBackward = () => {
+        const audio = audioRef.current;
+        audio.currentTime -= 10; // Skip backward 10 seconds
+    };
+
+    const playNextSong = () => {
+        if (album && trackIndex !== null && trackIndex < album.tracks.items.length - 1) {
+            // Get the next track
+            const nextTrack = album.tracks.items[trackIndex + 1];
+
+            // Navigate to the next track
+            router.push(`/playing/${nextTrack.id}`);
+        }
+    };
+
+    const playPreviousSong = () => {
+        if (album && trackIndex !== null && trackIndex > 0) {
+            // Get the previous track
+            const previousTrack = album.tracks.items[trackIndex - 1];
+
+            // Navigate to the previous track
+            router.push(`/playing/${previousTrack.id}`);
+        }
+    };
 
     if (!song) {
         return <div>Loading...</div>;
@@ -40,33 +122,34 @@ export default function SongPlayer() {
         <main className='mx-auto max-w-lg'>
             <Header showSearch={false} />
             <div>
-                <audio src=""></audio>
+                <audio ref={audioRef} src={song.preview_url} hidden></audio>
                 <img src={song.album.images[0].url} alt={song.name} />
                 <div className='mx-auto'>
                     <h1 className='text-center font-bold text-lg'>{song.name}</h1>
                     <p className='text-center text-sm'>{song.artists.map(artist => artist.name).join(', ')}</p>
                 </div>
                 <div className='mx-auto grid grid-cols-5 gap-2 justify-center max-w-72'>
-                    <button className=''>
+                    <button onClick={playPreviousSong}>
                         <PlaySkipBack color="black" className='relative left-4' />
                     </button>
 
-                    <button className=''>
+                    <button onClick={skipBackward}>
                         <PlayBack color="black" className='relative left-4' />
                     </button>
 
-                    <button className='bg-gradient-to-r from-pink-600 to-orange-600 rounded-full w-14 h-14'>
+                    <button className='bg-gradient-to-r from-pink-600 to-orange-600 rounded-full w-14 h-14' onClick={playSong}>
                         <Play color="white" className='relative left-4' />
                     </button>
 
-                    <button className=''>
+                    <button onClick={skipForward}>
                         <PlayForward color="black" className='relative left-4' />
                     </button>
 
-                    <button className=''>
+                    <button onClick={playNextSong}>
                         <PlaySkipForward color="black" className='relative left-4' />
                     </button>
                 </div>
+                <progress value={progress} max="100"></progress>
             </div>
         </main >
     );
