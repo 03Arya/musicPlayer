@@ -9,6 +9,7 @@ export default function Artist({ id }) {
     const [artist, setArtist] = useState(null);
     const [topTracks, setTopTracks] = useState([]);
     const [albums, setAlbums] = useState([]);
+    const [totalTracks, setTotalTracks] = useState(0);
 
     useEffect(() => {
         const fetchArtistAlbums = async () => {
@@ -34,8 +35,11 @@ export default function Artist({ id }) {
             const tracksResponses = await Promise.all(tracksPromises);
             const tracks = tracksResponses.map(response => response.data.items).flat();
             setTopTracks(tracks);
-            console.log(tracks);
+
+            const totalTracks = tracks.length;
+            setTotalTracks(totalTracks);
         };
+
         fetchArtistAlbums();
     }, [id]);
 
@@ -63,8 +67,17 @@ export default function Artist({ id }) {
             <main className='dark:bg-purple transition duration-500 mx-auto max-w-lg'>
                 <Header />
                 <div className=''>
-                    <div className='absolute z-10'>
-                        <h1 className='text-white font-bold text-3xl pl-5 pt-10'>{artist.name}</h1>
+                    <div className='absolute z-10 pl-5 pt-10 text-white font-bold'>
+                        <h1 className='text-3xl'>{artist.name}</h1>
+                        <p className='pt-2'>{totalTracks} Songs</p>
+                        <div className='pt-44'>
+                            <p className='text-gray-500 font-normal'>{artist.genres.length} Genres</p>
+                            <div className='flex flex-row overflow-x-auto gap-2'>
+                                {artist.genres.map((genre, index) => (
+                                    <p key={index} className='bg-pink-700 text-white px-2 text-center text-xs rounded-full py-2'>{genre}</p>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                     <img className='relative mx-auto' src={artist.images[0]?.url} alt={artist.name} />
                 </div>
@@ -74,20 +87,22 @@ export default function Artist({ id }) {
                         const minutes = Math.floor(trackItem.duration_ms / 60000);
                         const seconds = ((trackItem.duration_ms % 60000) / 1000).toFixed(0);
                         return (
-                            <li className='grid' key={index}>
-                                <div className='grid grid-cols-3'>
-                                    <div className='col-span-2 flex gap-3 w-72'>
-                                        <div className='bg-gradient-to-r from-pink-600 to-orange-600 rounded-full w-10 h-10 my-auto'>
-                                            <PlayOutline color="white" className='relative left-2.5 top-2' />
+                            <button>
+                                <li className='grid' key={index}>
+                                    <div className='grid grid-cols-3'>
+                                        <div className='col-span-2 flex gap-3 w-72'>
+                                            <div className='bg-gradient-to-r from-pink-600 to-orange-600 rounded-full w-10 h-10 my-auto'>
+                                                <PlayOutline color="white" className='relative left-2.5 top-2' />
+                                            </div>
+                                            <div className='col-start-2'>
+                                                <p className='dark:text-white transition duration-500 text-sm font-bold w-44 text-start'>{trackItem.name}</p>
+                                                <p className='text-xs text-gray-500 text-start'>{artist.name}</p>
+                                            </div>
                                         </div>
-                                        <div className='col-start-2'>
-                                            <p className='dark:text-white transition duration-500 text-sm font-bold w-44'>{trackItem.name}</p>
-                                            <p className='text-xs text-gray-500'>{artist.name}</p>
-                                        </div>
+                                        <p className='col-start-3 justify-end grid text-gray-500'>{minutes} : {seconds < 10 ? '0' : ''}{seconds}</p>
                                     </div>
-                                    <p className='col-start-3 justify-end grid text-gray-500'>{minutes} : {seconds < 10 ? '0' : ''}{seconds}</p>
-                                </div>
-                            </li>
+                                </li>
+                            </button>
                         )
                     })}
                 </ul>
