@@ -6,7 +6,7 @@ import { useState } from "react"
 import { useRouter } from 'next/router'
 
 
-export default function Header() {
+export default function Header({showSearch = true}) {
     const router = useRouter();
     const [token, setToken] = useState("")
 
@@ -26,7 +26,7 @@ export default function Header() {
                     <ChevronBackOutline className="" />
                 </button>
                 <p className="dark:text-white transition duration-500 text-center uppercase">{pageName}</p>
-                <SearchOutline className="justify-end grid" />
+                {showSearch && <SearchOutline className="justify-end grid" />}
             </nav>
         </header>
     )

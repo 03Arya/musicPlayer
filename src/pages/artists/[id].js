@@ -2,6 +2,7 @@
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import axios from 'axios';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { PlayOutline } from 'react-ionicons';
 
@@ -9,6 +10,7 @@ export default function Artist({ id }) {
     const [artist, setArtist] = useState(null);
     const [topTracks, setTopTracks] = useState([]);
     const [albums, setAlbums] = useState([]);
+    const [totalTracksIndex, setTotalTracksIndex] = useState(0);
     const [totalTracks, setTotalTracks] = useState(0);
 
     useEffect(() => {
@@ -36,8 +38,12 @@ export default function Artist({ id }) {
             const tracks = tracksResponses.map(response => response.data.items).flat();
             setTopTracks(tracks);
 
-            const totalTracks = tracks.length;
-            setTotalTracks(totalTracks);
+            const totalTracksIndex = tracks.length;
+            setTotalTracksIndex(totalTracksIndex);
+
+            const totalTracks = tracks
+            setTotalTracks(totalTracks)
+            console.log(totalTracks)
         };
 
         fetchArtistAlbums();
@@ -69,7 +75,7 @@ export default function Artist({ id }) {
                 <div className=''>
                     <div className='absolute z-10 pl-5 pt-10 text-white font-bold'>
                         <h1 className='text-3xl'>{artist.name}</h1>
-                        <p className='pt-2'>{totalTracks} Songs</p>
+                        <p className='pt-2'>{totalTracksIndex} Songs</p>
                         <div className='pt-44'>
                             <p className='text-gray-500 font-normal'>{artist.genres.length} Genres</p>
                             <div className='flex flex-row overflow-x-auto gap-2'>
@@ -87,7 +93,7 @@ export default function Artist({ id }) {
                         const minutes = Math.floor(trackItem.duration_ms / 60000);
                         const seconds = ((trackItem.duration_ms % 60000) / 1000).toFixed(0);
                         return (
-                            <button>
+                            <Link href={`/playing/${trackItem.id}`}>
                                 <li className='grid' key={index}>
                                     <div className='grid grid-cols-3'>
                                         <div className='col-span-2 flex gap-3 w-72'>
@@ -102,7 +108,7 @@ export default function Artist({ id }) {
                                         <p className='col-start-3 justify-end grid text-gray-500'>{minutes} : {seconds < 10 ? '0' : ''}{seconds}</p>
                                     </div>
                                 </li>
-                            </button>
+                            </Link>
                         )
                     })}
                 </ul>
