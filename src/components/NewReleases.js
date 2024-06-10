@@ -28,8 +28,8 @@ export default function NewReleases() {
                     <button className="w-full">
                         <img className="h-96 absolute rounded-md mx-auto grid justify-center left-0 right-0" src={album.images[0].url} alt={album.name} width="325px" loading="lazy" />
                         <div className="relative pt-72 pl-6 ">
-                            <p className="text-white text-xl font-bold">{album.name}</p>
-                            <p className="text-gray-300 ">Soundtrack</p>
+                            <p className="text-white text-xl font-bold text-start">{album.name}</p>
+                            <p className="text-gray-300 text-start">Soundtrack</p>
                         </div>
                     </button>
                 </div>
