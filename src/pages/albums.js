@@ -41,8 +41,9 @@ export default function Albums() {
                 <div className="flex gap-4 flex-row overflow-x-auto no-scrollbar mx-5 pb-6">
                     {albums.map(album => (
                         <div className="" key={album.id}>
+                            <button>
                             <img className="rounded-md w-40 h-40 max-w-40 mx-auto grid justify-center left-0 right-0" src={album.images[0].url} alt={album.name} loading="lazy" />
-
+                            </button>
                         </div>
                     ))}
                 </div>
