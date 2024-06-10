@@ -55,7 +55,6 @@ export default function SongPlayer() {
                 const trackIndex = albumResponse.data.tracks.items.findIndex(track => track.id === id);
                 setTrackIndex(trackIndex);
             };
-
             fetchSong();
         }
     }, [id]);
@@ -117,24 +116,27 @@ export default function SongPlayer() {
     if (!song) {
         return <div>Loading...</div>;
     }
+    const minutes = Math.floor(song.duration_ms / 60000);
+    const seconds = ((song.duration_ms % 60000) / 1000).toFixed(0);
 
     return (
-        <main className='mx-auto max-w-lg'>
+        <main className='mx-auto max-w-lg h-screen'>
             <Header showSearch={false} />
-            <div>
-                <audio ref={audioRef} src={song.preview_url} hidden></audio>
-                <img src={song.album.images[0].url} alt={song.name} />
+            <audio ref={audioRef} src={song.preview_url} hidden></audio>
+            <img src={song.album.images[0].url} alt={song.name} />
+
+            <section className='pt-14 bottom-0 mx-auto'>
                 <div className='mx-auto'>
-                    <h1 className='text-center font-bold text-lg'>{song.name}</h1>
+                    <h1 className='text-center font-bold text-xl'>{song.name}</h1>
                     <p className='text-center text-sm'>{song.artists.map(artist => artist.name).join(', ')}</p>
                 </div>
 
                 <div className='w-80 mx-auto py-4'>
-                    <progress className='mx-auto grid w-80 bg-pink-600 h-1' value={progress}></progress>
+                    <progress className='mx-auto grid w-80 bg-pink-600 h-1' max="100" value={progress}></progress>
                     <div className='grid grid-cols-2'>
                         <p>0:00</p>
-                        <p className='text-end'>3:22</p>
-                    </div>
+                        <p className='text-end'>{minutes}:{seconds < 10 ? `0${seconds}` : seconds}</p>
+                        </div>
                 </div>
 
                 <div className='mx-auto grid grid-cols-5 gap-2 justify-center max-w-72'>
@@ -158,7 +160,7 @@ export default function SongPlayer() {
                         <PlaySkipForward color="black" className='relative left-4' />
                     </button>
                 </div>
-            </div>
+            </section>
         </main >
     );
 }
