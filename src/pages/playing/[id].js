@@ -4,6 +4,7 @@ import axios from 'axios';
 import Header from '@/components/header';
 
 import { Play } from 'react-ionicons';
+import { Pause } from 'react-ionicons';
 import { PlayBack } from 'react-ionicons';
 import { PlayForward } from 'react-ionicons';
 import { PlaySkipBack } from 'react-ionicons';
@@ -17,6 +18,7 @@ export default function SongPlayer() {
     const [album, setAlbum] = useState(null);
     const [trackIndex, setTrackIndex] = useState(null);
     const [progress, setProgress] = useState(0); // Progress of the song
+    const [isPlaying, setIsPlaying] = useState(false); // Whether the song is playing
 
     const audioRef = useRef(); // Reference to the audio element
 
@@ -25,8 +27,10 @@ export default function SongPlayer() {
 
         if (audio.paused) {
             audio.play();
+            setIsPlaying(true); // Step 3
         } else {
             audio.pause();
+            setIsPlaying(false); // Step 3
         }
     };
 
@@ -136,7 +140,7 @@ export default function SongPlayer() {
                     <div className='grid grid-cols-2'>
                         <p>0:00</p>
                         <p className='text-end'>{minutes}:{seconds < 10 ? `0${seconds}` : seconds}</p>
-                        </div>
+                    </div>
                 </div>
 
                 <div className='mx-auto grid grid-cols-5 gap-2 justify-center max-w-72'>
@@ -149,7 +153,7 @@ export default function SongPlayer() {
                     </button>
 
                     <button className='bg-gradient-to-r from-pink-600 to-orange-600 rounded-full w-14 h-14' onClick={playSong}>
-                        <Play color="white" className='relative left-[18px]' />
+                        {isPlaying ? <Pause color="white" className='relative left-4' /> : <Play color="white" className='relative left-[18px]' />} {/* Step 4 */}
                     </button>
 
                     <button onClick={skipForward}>
