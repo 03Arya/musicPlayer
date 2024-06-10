@@ -4,7 +4,7 @@ import Header from '@/components/header';
 import axios from 'axios';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { PlayOutline } from 'react-ionicons';
+import { Play } from 'react-ionicons';
 
 export default function Artist({ id }) {
     const [artist, setArtist] = useState(null);
@@ -98,7 +98,7 @@ export default function Artist({ id }) {
                                     <div className='grid grid-cols-3'>
                                         <div className='col-span-2 flex gap-3 w-72'>
                                             <div className='bg-gradient-to-r from-pink-600 to-orange-600 rounded-full w-10 h-10 my-auto'>
-                                                <PlayOutline color="white" className='relative left-2.5 top-2' />
+                                                <Play color="white" className='relative left-2.5 top-2' />
                                             </div>
                                             <div className='col-start-2'>
                                                 <p className='dark:text-white transition duration-500 text-sm font-bold w-44 text-start'>{trackItem.name}</p>

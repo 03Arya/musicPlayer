@@ -4,7 +4,7 @@ import Header from '@/components/header';
 import { useRouter } from 'next/router';
 import useSpotify from '@/hooks/useSpotify';
 import Link from 'next/link';
-import { PlayOutline } from 'react-ionicons';
+import { Play } from 'react-ionicons';
 
 export default function Playlist() {
     const router = useRouter();
@@ -28,22 +28,24 @@ export default function Playlist() {
                             const minutes = Math.floor(trackItem.track.duration_ms / 60000);
                             const seconds = ((trackItem.track.duration_ms % 60000) / 1000).toFixed(0);
                             return (
-                                <li className='grid' key={index}>
-                                    <div className='flex gap-3 w-60'>
-                                        <div className='bg-gradient-to-r from-pink-600 to-orange-600 rounded-full w-10 h-10 my-auto'>
-                                            <PlayOutline color="white" className='relative left-2.5 top-2' />
+                                <Link href={`/playing/${trackItem.track.id}`} >
+                                    <li className='grid' key={index}>
+                                        <div className='flex gap-3 w-60'>
+                                            <div className='bg-gradient-to-r from-pink-600 to-orange-600 rounded-full w-10 h-10 my-auto'>
+                                                <Play color="white" className='relative left-2.5 top-2' />
+                                            </div>
+                                            <div className='grid'>
+                                                <p className='dark:text-white transition duration-500 text-sm font-bold w-44'>{trackItem.track.name}</p>
+                                                <span>
+                                                    <Link href={`/artists/${trackItem.track.artists[0].id}`}>
+                                                        <p className='text-xs text-gray-500'>{trackItem.track.artists[0].name}</p>
+                                                    </Link>
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div className='grid'>
-                                            <p className='dark:text-white transition duration-500 text-sm font-bold w-44'>{trackItem.track.name}</p>
-                                            <span>
-                                                <Link href={`/artists/${trackItem.track.artists[0].id}`}>
-                                                    <p className='text-xs text-gray-500'>{trackItem.track.artists[0].name}</p>
-                                                </Link>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <p className='col-start-3 justify-end grid text-gray-500'>{minutes} : {seconds < 10 ? '0' : ''}{seconds}</p>
-                                </li>
+                                        <p className='col-start-3 justify-end grid text-gray-500'>{minutes} : {seconds < 10 ? '0' : ''}{seconds}</p>
+                                    </li>
+                                </Link>
                             )
                         })}
                     </ul>

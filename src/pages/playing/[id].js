@@ -128,6 +128,15 @@ export default function SongPlayer() {
                     <h1 className='text-center font-bold text-lg'>{song.name}</h1>
                     <p className='text-center text-sm'>{song.artists.map(artist => artist.name).join(', ')}</p>
                 </div>
+
+                <div className='w-80 mx-auto py-4'>
+                    <progress className='mx-auto grid w-80 bg-pink-600 h-1' value={progress}></progress>
+                    <div className='grid grid-cols-2'>
+                        <p>0:00</p>
+                        <p className='text-end'>3:22</p>
+                    </div>
+                </div>
+
                 <div className='mx-auto grid grid-cols-5 gap-2 justify-center max-w-72'>
                     <button onClick={playPreviousSong}>
                         <PlaySkipBack color="black" className='relative left-4' />
@@ -138,7 +147,7 @@ export default function SongPlayer() {
                     </button>
 
                     <button className='bg-gradient-to-r from-pink-600 to-orange-600 rounded-full w-14 h-14' onClick={playSong}>
-                        <Play color="white" className='relative left-4' />
+                        <Play color="white" className='relative left-[18px]' />
                     </button>
 
                     <button onClick={skipForward}>
@@ -149,7 +158,6 @@ export default function SongPlayer() {
                         <PlaySkipForward color="black" className='relative left-4' />
                     </button>
                 </div>
-                <progress value={progress} max="100"></progress>
             </div>
         </main >
     );

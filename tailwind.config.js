@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      inset: {
+        "18px": "18px",
+      },
       colors: {
         purple: "#341931",
         DarkPurple: "#111625"
