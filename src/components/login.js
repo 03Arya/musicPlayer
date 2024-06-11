@@ -9,7 +9,6 @@ export default function Login() {
     const RESPONSE_TYPE = "token"
 
     const [token, setToken] = useState("")
-    const [artists, setArtists] = useState([])
 
     useEffect(() => {
         const hash = window.location.hash
@@ -19,16 +18,16 @@ export default function Login() {
             token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1];
             window.location.hash = ""
             window.localStorage.setItem("token", token)
-            window.location.href = '/featured'; // Redirect using window.location.href
+            window.location.href = '/featured'; 
         }
         setToken(token)
 
-    }, []) // Changed to an empty array
+    }, [])
 
     const logout = () => {
         setToken("")
         window.localStorage.removeItem("token")
-        window.location.href = '/'; // Redirect using window.location.href
+        window.location.href = '/';
     }
 
     return (
@@ -36,14 +35,6 @@ export default function Login() {
             {!token ?
                 <a className="loginLink rounded-full py-3 text-center grid font-bold w-full mt-80" href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>LOG IN</a>
                 : <button onClick={logout}>Logout</button>}
-            {
-                artists.map(artist => (
-                    <div key={artist.id}>
-                        <h2>{artist.name}</h2>
-                        <img src={artist.images[0].url} alt={artist.name} width="100px" height="100px" />
-                    </div>
-                ))
-            }
         </div>
     );
 }

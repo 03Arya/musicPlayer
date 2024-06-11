@@ -43,7 +43,6 @@ export default function Artist({ id }) {
 
             const totalTracks = tracks
             setTotalTracks(totalTracks)
-            console.log(totalTracks)
         };
 
         fetchArtistAlbums();
@@ -58,7 +57,6 @@ export default function Artist({ id }) {
                 }
             });
             setArtist(response.data);
-            console.log(response.data);
         };
 
         fetchArtist();

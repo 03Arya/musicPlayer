@@ -27,10 +27,10 @@ export default function SongPlayer() {
 
         if (audio.paused) {
             audio.play();
-            setIsPlaying(true); // Step 3
+            setIsPlaying(true);
         } else {
             audio.pause();
-            setIsPlaying(false); // Step 3
+            setIsPlaying(false);
         }
     };
 
