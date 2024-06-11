@@ -49,7 +49,7 @@ export default function Playlist() {
                             )
                         })}
                     </ul>
-                    <a className="listenAllButton text-pink-700 rounded-full py-3 text-center grid font-bold w-full my-20 max-w-80 mx-auto">LISTEN ALL</a>
+                    <button className="listenAllButton text-pink-700 rounded-full py-3 text-center grid font-bold w-full my-16 max-w-80 mx-auto">LISTEN ALL</button>
                 </div>
                 <Footer />
             </main>

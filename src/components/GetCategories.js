@@ -47,7 +47,7 @@ export default function GetCategories() {
                         <button className="max-w-80 mx-auto bg-pink-600 rounded-md font-bold text-white py-6 pl-6 grid grid-cols-2 grid-rows-1 w-80 text-start" onClick={() => fetchPlaylists(category.id)}>{category.name}<EllipsisHorizontal color="white" className="mx-auto pl-10" /></button>
                             {selectedCategory === category.id && playlists.map(playlist => (
                                 <div className="grid grid-cols-2 my-4 max-w-72 mx-auto" key={playlist.id}>
-                                    <Link className="dark:text-white transition duration-500 w-60 text-sm" href={`/playlists/${playlist.id}`}>{playlist.name}</Link>
+                                    <Link className="dark:text-white transition duration-500 w-60 text-sm flex flex-row overflow-x-auto max-h-6" href={`/playlists/${playlist.id}`}>{playlist.name}</Link>
                                     <ChevronForwardOutline className="justify-end grid" />
                                 </div>
                             ))}
