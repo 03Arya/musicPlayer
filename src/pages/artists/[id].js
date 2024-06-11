@@ -76,9 +76,9 @@ export default function Artist({ id }) {
                     <div className='absolute z-10 pl-5 pt-10 text-white font-bold'>
                         <h1 className='text-3xl'>{artist.name}</h1>
                         <p className='pt-2'>{totalTracksIndex} Songs</p>
-                        <div className='pt-44'>
+                        <div className='pt-44 max-w-72'>
                             <p className='text-gray-500 font-normal'>{artist.genres.length} Genres</p>
-                            <div className='flex flex-row overflow-x-auto gap-2'>
+                            <div className='flex flex-row overflow-x-auto gap-2 no-scrollbar'>
                                 {artist.genres.map((genre, index) => (
                                     <p key={index} className='bg-pink-700 text-white px-2 text-center text-xs rounded-full py-2'>{genre}</p>
                                 ))}
