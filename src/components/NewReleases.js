@@ -24,9 +24,8 @@ export default function NewReleases() {
     return (
         <section className="grid grid-cols-1 gap-8 mx-auto max-w-xs">
             {albums.map(album => (
-                <div className="h-96 w-full shadow-xl shadow-slate-500/50" key={album.id}>
+                <div className="    w-full shadow-xl shadow-slate-500/50 bg-contain bg-center bg-no-repeat" style={{backgroundImage: `url(${album.images[0].url})`}} key={album.id}>
                     <button className="w-full">
-                        <img className="h-96 absolute rounded-md mx-auto grid justify-center left-0 right-0" src={album.images[0].url} alt={album.name} width="325px" loading="lazy" />
                         <div className="relative pt-72 pl-6 ">
                             <p className="text-white text-xl font-bold text-start">{album.name}</p>
                             <p className="text-gray-300 text-start">Soundtrack</p>
